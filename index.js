@@ -7,6 +7,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(bodyParser.json());
 
 app.post('/create-payment-intent', async (req, res) => {
+  console.log('İstek geldi:', req.body);
   const { amount, currency } = req.body;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -16,6 +17,7 @@ app.post('/create-payment-intent', async (req, res) => {
     });
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
+    console.error('Stripe Hatası:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
