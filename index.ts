@@ -936,6 +936,7 @@ app.post('/get-payment-option', async (req, res) => {
   });
 });
 
-app.listen(4242, (): void =>
-  console.log(`Node server listening on port ${4242}!`)
+const port = process.env.PORT || 4242;
+app.listen(port, (): void =>
+  console.log(`Node server listening on port ${port}!`)
 );
